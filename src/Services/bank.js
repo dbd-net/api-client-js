@@ -1,4 +1,4 @@
-window.Bank = class Bank {
+export default class Bank {
   
   listBankAccounts() {
     console.log('list bank accounts');

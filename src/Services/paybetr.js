@@ -1,4 +1,4 @@
-window.Paybetr = class Paybetr {
+export default class Paybetr {
 
   listCurrencies() {
     console.log('list currencies');

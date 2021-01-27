@@ -1,5 +1,5 @@
 {
-  "name": "api-client",
+  "name": "@gamebetr/api-client-js",
   "version": "1.0.0",
   "description": "Gamebetr API client library",
   "main": "index.js",
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/gamebetr/api-client-js/issues"
   },
-  "homepage": "https://github.com/gamebetr/api-client-js#readme"
+  "homepage": "https://github.com/gamebetr/api-client-js#readme",
+  "devDependencies": {
+    "vue-template-compiler": "^2.6.12"
+  }
 }

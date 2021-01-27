@@ -1,4 +1,4 @@
-class User {
+export default class User {
   
   // get user data like profile, vip, aff, w/e else
   loadData() {

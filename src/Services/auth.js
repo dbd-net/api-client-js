@@ -1,7 +1,7 @@
 import Client from '../client';
 import Token from '../token';
 
-window.Auth = class Auth {
+export default class Auth {
 
   constructor(config) {
     this.config = config;
@@ -63,5 +63,3 @@ window.Auth = class Auth {
   }
 
 }
-
-export default Auth;
