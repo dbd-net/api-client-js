@@ -1,15 +1,18 @@
 export default class Token {
 
   constructor() {
-    this.tokenName = 'gamebetrToken';
+    this.tokenName = 'gamebetr_token';
   }
 
   // store the token as a cookie
   setToken(token, expire) {
-    // TODO: probably set expiration with login return value
-    console.log(expire);
-    document.cookie = this.tokenName + '=' + token;
+    let expires = new Date(expire).toUTCString();
+    let domain = '';
+    // let domain = '.' + window.location.host;
+    document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain;
     console.log('Cookie token set as: ' + token);
+    console.log(expires);
+    console.log(domain);
   }
 
   getToken() {
@@ -30,5 +33,10 @@ export default class Token {
       }
     }
     return "";
+  }
+
+  // logout
+  deleteToken() {
+    //
   }
 }

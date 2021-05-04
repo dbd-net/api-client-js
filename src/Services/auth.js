@@ -9,9 +9,7 @@ export default class Auth {
 
   // client side validation
   validateRegister(name, email, password) {
-    console.log(name);
-    console.log(email);
-    console.log(password);
+    console.log('Client side validating: ' + name + email + 'pwd');
   }
 
   register(name, email, password) {
@@ -21,7 +19,7 @@ export default class Auth {
       'email': email,
       'password': password
     };
-    return client.request('POST', '/api/v1/user/register', data);
+    return client.request('POST', 'user/register', data);
 
   }
 
@@ -35,11 +33,11 @@ export default class Auth {
     };
 
     // set cookie
-    let token = new Token();
-    token.setToken('my token ABC', 'expire date');
+    // let token = new Token();
+    // token.setToken('my token ABC', 'expire date');
     // let myToken = token.getToken();
 
-    return client.request('POST', '/api/v1/user/login', data);
+    return client.request('POST', 'user/login', data);
   }
 
   logout() {

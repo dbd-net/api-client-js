@@ -6,7 +6,7 @@ client.request('GET', '/api/v1/endpoint').then(data => console.log(data))
 export default class Client {
 
   constructor(config) {
-    this.baseUri = 'https://devpub-api.dbd.net'
+    this.baseUri = 'https://devpub-api.dbd.net/api/v1/'
 
     if (typeof config.baseUri !== 'undefined') {
       this.setBaseUri(config.baseUri);
@@ -31,30 +31,46 @@ export default class Client {
     this.token = token;
   }
 
-  request(method, uri, bodyData) {
+  request(method, uri, bodyData = null) {
     // headers
-    var myHeaders = new Headers();
-    myHeaders.append("DomainId", this.domainId);
-    if (typeof this.token !== 'undefined') {
-      console.log('token is set');
-      myHeaders.append("Authorization", "Bearer " + this.token);
-    }
+    // var myHeaders = {};
+    // // myHeaders.DomainId = this.domainId;
+    // // myHeaders.content-type = 'application.json';
+    // if (typeof this.token !== 'undefined') {
+    //   console.log('token is set as: ' + this.token);
+    //   myHeaders.Authorization = "Bearer " + this.token;
+    // }
 
-    // form data
-    var myBody = new FormData();
-    var dataMethods = ['POST', 'PUT', 'PATCH'];
-    if (dataMethods.indexOf(method) !== -1) {
-      for (const key in bodyData) {
-        myBody.append(`${key}`, `${bodyData[key]}`);
-      }
+    var myHeaders = {
+      'Authorization': 'Bearer ' + this.token
     };
 
-    // build request
     var requestOptions = {
       method: method,
       headers: myHeaders,
-      body: myBody,
     };
+    console.log(requestOptions);
+
+    // form data
+    if (bodyData != null) {
+      var myBody = new FormData();
+      var dataMethods = ['POST', 'PUT', 'PATCH'];
+      if (dataMethods.indexOf(method) !== -1) {
+        for (const key in bodyData) {
+          myBody.append(`${key}`, `${bodyData[key]}`);
+        }
+      };
+      // append body to request
+      requestOptions.body = myBody;
+
+    }
+
+    // build request
+    // var requestOptions = {
+    //   method: method,
+    //   headers: myHeaders,
+    //   body: myBody,
+    // };
 
     // return response Promise
     return fetch(this.baseUri + uri, requestOptions)
