@@ -23,8 +23,5 @@
   "bugs": {
     "url": "https://github.com/gamebetr/api-client-js/issues"
   },
-  "homepage": "https://github.com/gamebetr/api-client-js#readme",
-  "devDependencies": {
-    "vue-template-compiler": "^2.6.12"
-  }
+  "homepage": "https://github.com/gamebetr/api-client-js#readme"
 }
