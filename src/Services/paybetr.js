@@ -2,7 +2,7 @@ import Client from '../client';
 
 export default class Paybetr {
 
-  constructor(config) {
+  constructor(config = {}) {
     this.config = config;
   }
 

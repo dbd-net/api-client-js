@@ -7,16 +7,21 @@ export default class Token {
   // store the token as a cookie
   setToken(token, expire) {
     let expires = new Date(expire).toUTCString();
-    let domain = '';
-    // let domain = '.' + window.location.host;
-    document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain;
+    let domain = '.' + this.getBaseUri();
+    document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain + ';path=/';
     console.log('Cookie token set as: ' + token);
     console.log(expires);
     console.log(domain);
   }
 
+  getBaseUri() {
+    let host = window.location.host;
+    return host.split('.')[host.split('.').length-2]+'.'+host.split('.')[host.split('.').length-1];
+  }
+
   getToken() {
-    return this.getCookie(this.tokenName);
+    // return this.getCookie(this.tokenName);
+    return 'b08811f7d23e9a21759fb444b3e340a8e50e45ab5ca7b2a46d4990bb4b8b53f5aab8c9b7f30f4d5504fccad13bc3cbc8246f521c01514aa847052feed70b63bb';
   }
 
   getCookie(cname) {

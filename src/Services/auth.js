@@ -3,7 +3,7 @@ import Token from '../token';
 
 export default class Auth {
 
-  constructor(config) {
+  constructor(config = {}) {
     this.config = config;
   }
 
@@ -23,20 +23,12 @@ export default class Auth {
 
   }
 
-  login(email, password, domainId) {
-    console.log('start login');
+  login(email, password) {
     let client = new Client(this.config);
     let data = {
       'email': email,
       'password': password,
-      'domain_id': domainId
     };
-
-    // set cookie
-    // let token = new Token();
-    // token.setToken('my token ABC', 'expire date');
-    // let myToken = token.getToken();
-
     return client.request('POST', 'user/login', data);
   }
 

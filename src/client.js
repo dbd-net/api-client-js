@@ -1,3 +1,5 @@
+import Token from './token';
+
 /**
 Example usage:
 let client = new Client({'domainId': 1000001});
@@ -5,17 +7,21 @@ client.request('GET', '/api/v1/endpoint').then(data => console.log(data))
 */
 export default class Client {
 
-  constructor(config) {
+  constructor(config = {}) {
+    const token = new Token();
     this.baseUri = 'https://devpub-api.dbd.net/api/v1/'
 
     if (typeof config.baseUri !== 'undefined') {
       this.setBaseUri(config.baseUri);
     }
-    if (typeof config.domainId !== 'undefined') {
-      this.setDomainId(config.domainId);
-    }
+    // if (typeof config.domainId !== 'undefined') {
+    //   this.setDomainId(config.domainId);
+    // }
     if (typeof config.token !== 'undefined') {
       this.setToken(config.token);
+    } else {
+      console.log('client instantiated with token: ' + token.getToken());
+      this.setToken(token.getToken());
     }
   }
 
@@ -32,15 +38,6 @@ export default class Client {
   }
 
   request(method, uri, bodyData = null) {
-    // headers
-    // var myHeaders = {};
-    // // myHeaders.DomainId = this.domainId;
-    // // myHeaders.content-type = 'application.json';
-    // if (typeof this.token !== 'undefined') {
-    //   console.log('token is set as: ' + this.token);
-    //   myHeaders.Authorization = "Bearer " + this.token;
-    // }
-
     var myHeaders = {
       'Authorization': 'Bearer ' + this.token
     };
@@ -49,7 +46,6 @@ export default class Client {
       method: method,
       headers: myHeaders,
     };
-    console.log(requestOptions);
 
     // form data
     if (bodyData != null) {
@@ -65,12 +61,10 @@ export default class Client {
 
     }
 
-    // build request
-    // var requestOptions = {
-    //   method: method,
-    //   headers: myHeaders,
-    //   body: myBody,
-    // };
+    // requestOptions.mode = "no-cors";
+
+    console.log(this.baseUri + uri);
+    console.log(requestOptions);
 
     // return response Promise
     return fetch(this.baseUri + uri, requestOptions)
