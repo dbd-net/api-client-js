@@ -20,8 +20,7 @@ export default class Token {
   }
 
   getToken() {
-    // return this.getCookie(this.tokenName);
-    return 'b08811f7d23e9a21759fb444b3e340a8e50e45ab5ca7b2a46d4990bb4b8b53f5aab8c9b7f30f4d5504fccad13bc3cbc8246f521c01514aa847052feed70b63bb';
+    return this.getCookie(this.tokenName);
   }
 
   getCookie(cname) {
