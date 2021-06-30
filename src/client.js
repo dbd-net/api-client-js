@@ -2,21 +2,20 @@ import Token from './token';
 
 /**
 Example usage:
-let client = new Client({'domainId': 1000001});
+let client = new Client({'baseUri': 'https://www.site.com'});
 client.request('GET', '/api/v1/endpoint').then(data => console.log(data))
 */
 export default class Client {
 
   constructor(config = {}) {
     const token = new Token();
-    this.baseUri = 'https://devpub-api.dbd.net/api/v1/'
+
+    // default to playerapi.<domain>.tld
+    this.baseUri = 'https://playerapi.' + token.getBaseUri();
 
     if (typeof config.baseUri !== 'undefined') {
       this.setBaseUri(config.baseUri);
     }
-    // if (typeof config.domainId !== 'undefined') {
-    //   this.setDomainId(config.domainId);
-    // }
     if (typeof config.token !== 'undefined') {
       this.setToken(config.token);
     } else {
@@ -61,13 +60,13 @@ export default class Client {
 
     }
 
-    // requestOptions.mode = "no-cors";
+    // return response Promise
+    var requestUrl = this.baseUri + '/api/v1/' + uri
 
-    console.log(this.baseUri + uri);
+    console.log(requestUrl);
     console.log(requestOptions);
 
-    // return response Promise
-    return fetch(this.baseUri + uri, requestOptions)
+    return fetch(requestUrl, requestOptions)
       .then(response => response.json())
       .catch(function(error) {
         console.log('Fetch Error: ', error);

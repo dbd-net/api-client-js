@@ -32,6 +32,15 @@ export default class Auth {
     return client.request('POST', 'user/login', data);
   }
 
+  forgotPassword(email, new_password) {
+    let client = new Client(this.config);
+    let data = {
+      'email': email,
+      'new_password': new_password,
+    };
+    return client.request('POST', 'user/password', data);
+  }
+
   logout() {
     console.log('logout');
   }

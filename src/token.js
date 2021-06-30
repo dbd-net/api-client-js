@@ -6,8 +6,12 @@ export default class Token {
 
   // store the token as a cookie
   setToken(token, expire) {
+    // use auth api expiration as cookie expiration
     let expires = new Date(expire).toUTCString();
+
+    // use the current domain as wildcard domain for cookie
     let domain = '.' + this.getBaseUri();
+    
     document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain + ';path=/';
     console.log('Cookie token set as: ' + token);
     console.log(expires);

@@ -10,6 +10,16 @@ export default class User {
     let client = new Client(this.config);
     return client.request('GET', 'user');
   }
+
+  enable2fa() {
+    let client = new Client(this.config);
+    return client.request('GET', 'user/enable2fa');
+  }
+
+  disable2fa() {
+    let client = new Client(this.config);
+    return client.request('GET', 'user/disable2fa');
+  }
   
   // get user data like profile, vip, aff, w/e else
   loadData() {
