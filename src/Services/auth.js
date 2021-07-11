@@ -12,15 +12,17 @@ export default class Auth {
     console.log('Client side validating: ' + name + email + 'pwd');
   }
 
-  register(name, email, password) {
+  register(name, email, password, affiliate_id = 0) {
     let client = new Client(this.config);
     let data = {
       'name': name,
       'email': email,
       'password': password
     };
+    if (affiliate_id > 0) {
+    	data.affiliate_id = affiliate_id;
+    }
     return client.request('POST', 'user/register', data);
-
   }
 
   login(email, password) {
