@@ -7,17 +7,13 @@ export default class Bank {
   }
   
   listBankAccounts() {
-    console.log('list bank accounts');
+    let client = new Client(this.config);
+    return client.request('GET', 'bank/account?sort=-primary,bank.weight');
   }
 
-  listBalances() {
-    //
-  }
-
-  // how to do filters? maybe do this via php client?
-  // yeah, probably hit this manually via drupal php
-  listTransactions() {
-    //
+  getPrimaryBankAccount() {
+    let client = new Client(this.config);
+    return client.request('GET', 'bank/account?sort=-primary&page[size]=1');
   }
 
   createTransfer(from, to, amount) {

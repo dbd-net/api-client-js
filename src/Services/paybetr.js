@@ -40,6 +40,7 @@ export default class Paybetr {
   }
 
   getCurrencyName(symbol) {
+    return 'fixthis';
     switch(symbol.toLowerCase()) {
       case 'btc':
         return 'Bitcoin';

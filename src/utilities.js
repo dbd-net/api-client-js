@@ -1,7 +1,7 @@
 export default class Utilities {
 
-  getLoadingIcon() {
-    return '<i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>';
+  getLoadingIcon(extraClass = '') {
+    return '<i class="fa fa-refresh fa-spin fa-fw ' + extraClass + '"></i>';
   }
 
 }
