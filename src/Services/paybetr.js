@@ -36,21 +36,8 @@ export default class Paybetr {
   }
 
   convert(from, to, amount) {
-    //
-  }
-
-  getCurrencyName(symbol) {
-    return 'fixthis';
-    switch(symbol.toLowerCase()) {
-      case 'btc':
-        return 'Bitcoin';
-      case 'eth':
-        return 'Ethereum';
-      case 'xrp':
-        return 'Ripple';
-      default:
-        return symbol;
-    }
+    let client = new Client(this.config);
+    return client.request('GET', 'paybetr/currency/' + from + '/convert/' + to + '/' + amount);
   }
   
 }

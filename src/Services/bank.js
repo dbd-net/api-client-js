@@ -16,6 +16,11 @@ export default class Bank {
     return client.request('GET', 'bank/account?sort=-primary&page[size]=1');
   }
 
+  setPrimaryBankAccount(display_unit) {
+    let client = new Client(this.config);
+    return client.request('GET', 'bank/account/' + display_unit + '/primary');
+  }
+
   createTransfer(from, to, amount) {
     console.log('create transfer');
     let client = new Client(this.config);
