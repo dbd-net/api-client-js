@@ -10,7 +10,7 @@ export default class Client {
   constructor(config = {}) {
     const token = new Token();
 
-    // default to playerapi.<domain>.tld
+    // default to playerapi.<domain>.<tld>
     this.baseUri = 'https://playerapi.' + token.getBaseUri();
 
     if (typeof config.baseUri !== 'undefined') {
@@ -19,7 +19,7 @@ export default class Client {
     if (typeof config.token !== 'undefined') {
       this.setToken(config.token);
     } else {
-      console.log('client instantiated with token: ' + token.getToken());
+      // console.log('client instantiated with token: ' + token.getToken());
       this.setToken(token.getToken());
     }
   }
@@ -63,8 +63,8 @@ export default class Client {
     // return response Promise
     var requestUrl = this.baseUri + '/api/v1/' + uri
 
-    console.log(requestUrl);
-    console.log(requestOptions);
+    // console.log(requestUrl);
+    // console.log(requestOptions);
 
     return fetch(requestUrl, requestOptions)
       .then(response => response.json())

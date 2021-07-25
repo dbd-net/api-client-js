@@ -13,9 +13,9 @@ export default class Token {
     let domain = '.' + this.getBaseUri();
     
     document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain + ';path=/';
-    console.log('Cookie token set as: ' + token);
-    console.log(expires);
-    console.log(domain);
+    // console.log('Cookie token set as: ' + token);
+    // console.log(expires);
+    // console.log(domain);
   }
 
   getBaseUri() {

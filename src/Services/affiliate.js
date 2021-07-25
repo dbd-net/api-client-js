@@ -12,7 +12,7 @@ export default class Affiliate {
     let affiliate_id = this.getCookieAffiliateId();
     if (!isNaN(affiliate_id)) {
       // do request here
-      console.log('do server request here: ' + user_id);
+      // console.log('do server request here: ' + user_id);
       // let client = new Client(this.config);
       // let data = {
       //   'user1': user_id,

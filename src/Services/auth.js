@@ -9,7 +9,7 @@ export default class Auth {
 
   // client side validation
   validateRegister(name, email, password) {
-    console.log('Client side validating: ' + name + email + 'pwd');
+    // console.log('Client side validating: ' + name + email + 'pwd');
   }
 
   register(name, email, password, affiliate_id = 0) {
@@ -44,7 +44,7 @@ export default class Auth {
   }
 
   logout() {
-    console.log('logout');
+    // console.log('logout');
   }
 
   enable2fa() {

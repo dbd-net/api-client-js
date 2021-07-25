@@ -22,7 +22,6 @@ export default class Bank {
   }
 
   createTransfer(from, to, amount) {
-    console.log('create transfer');
     let client = new Client(this.config);
     let data = {
       'from': from,
