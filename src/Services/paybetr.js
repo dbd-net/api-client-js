@@ -11,16 +11,19 @@ export default class Paybetr {
     return client.request('GET', 'paybetr/currency');
   }
 
-  listAddresses(symbol) {
-    // get address, qrcode, conv rate, min dep and notes (like for xrp)
+  getAddress(symbol) {
     let client = new Client(this.config);
-    return client.request('GET', 'paybetr/address/' + symbol);
+    let data = {
+      'symbol': symbol
+    };
+    return client.request('POST', 'paybetr/address', data);
   }
 
   createAddress(symbol) {
     let client = new Client(this.config);
     let data = {
-      'symbol': symbol
+      'symbol': symbol,
+      'refresh': 1
     };
     return client.request('POST', 'paybetr/address', data);
   }
