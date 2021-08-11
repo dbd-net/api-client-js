@@ -20,16 +20,10 @@ export default class User {
     let client = new Client(this.config);
     return client.request('GET', 'user/disable2fa');
   }
-  
-  // get user data like profile, vip, aff, w/e else
-  loadData() {
-    // affiliate
-      // referrer
-      // count
-    // vip
-      // current level
-      // next level
-      // status points
+
+  getVariable(variable) {
+    let client = new Client(this.config);
+    return client.request('GET', 'user/variables/' + variable);
   }
 
 }
