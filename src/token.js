@@ -2,6 +2,7 @@ export default class Token {
 
   constructor() {
     this.tokenName = 'gamebetr_token';
+    this.baseUriName = 'gamebetr_base_uri';
   }
 
   // store the token as a cookie
@@ -19,8 +20,13 @@ export default class Token {
   }
 
   getBaseUri() {
-    let host = window.location.host;
-    return host.split('.')[host.split('.').length-2]+'.'+host.split('.')[host.split('.').length-1];
+    // check if gamebetr_base_uri cookie exists
+    if (this.getCookie(this.baseUriName)) {
+      return this.getCookie(this.baseUriName);
+    } else {
+      let host = window.location.host;
+      return host.split('.')[host.split('.').length-2]+'.'+host.split('.')[host.split('.').length-1];
+    }
   }
 
   getToken() {
