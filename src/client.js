@@ -1,17 +1,16 @@
 import Token from './token';
 
 /**
-Example usage:
-let client = new Client({'baseUri': 'https://www.site.com'});
-client.request('GET', '/api/v1/endpoint').then(data => console.log(data))
-*/
+ * Example usage:
+ * let client = new Client({'baseUri': 'https://www.site.com'});
+ * client.request('GET', '/api/v1/endpoint').then(data => console.log(data))
+ */
 export default class Client {
 
   constructor(config = {}) {
     const token = new Token();
 
-    // default to playerapi.<domain>.<tld>
-    this.baseUri = 'https://playerapi.' + token.getBaseUri();
+    this.baseUri = token.getApiUri();
 
     if (typeof config.baseUri !== 'undefined') {
       this.setBaseUri(config.baseUri);
