@@ -40,7 +40,7 @@ export default class Token {
     if (this.getCookie(this.apiUriName)) {
       return this.getCookie(this.apiUriName);
     } else {
-      return 'https://playerapi.' + token.getBaseDomain();
+      return 'https://playerapi.' + this.getBaseDomain();
     }
   }
 
