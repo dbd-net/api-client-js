@@ -27,7 +27,7 @@ export default class Leaderboard {
         tag = 'sports';
         break;
     }
-    let endpoint ='leaderboard/reports/' + path + '?filter[tags][]=' + tag + '&filter[period]=' + period + '&filter[display-currency.display-unit]=' + currency;
+    let endpoint ='leaderboard/reports/' + path + '?page[size]=50&filter[tags][]=' + tag + '&filter[period]=' + period + '&filter[display-currency.display-unit]=' + currency;
     let client = new Client(this.config);
     return client.request('GET', endpoint);
   }
