@@ -6,7 +6,7 @@ export default class Leaderboard {
     this.config = config;
   }
   
-  list(type, period, currency) {
+  list(type, period, currency = '') {
     let path = '';
     let tag = '';
     switch (type) {
@@ -27,7 +27,11 @@ export default class Leaderboard {
         tag = 'sports';
         break;
     }
-    let endpoint ='leaderboard/reports/' + path + '?page[size]=50&filter[tags][]=' + tag + '&filter[period]=' + period + '&filter[display-currency.display-unit]=' + currency;
+    let currency_filter = '';
+    // if (currency != '') {
+      currency_filter = '&filter[display-currency.display-unit]=' + currency;
+    // }
+    let endpoint ='leaderboard/reports/' + path + '?page[size]=50&filter[tags][]=' + tag + '&filter[period]=' + period + currency_filter;
     let client = new Client(this.config);
     return client.request('GET', endpoint);
   }

@@ -6,6 +6,7 @@ export default class Token {
     this.baseDomainName = 'gamebetr_base_domain';
     this.apiUriName = 'gamebetr_api_uri';
     this.webUriName = 'gamebetr_web_uri';
+    this.domainIdName = 'gamebetr_domain_id';
   }
 
   // store the token as a cookie
@@ -49,6 +50,14 @@ export default class Token {
       return this.getCookie(this.webUriName);
     } else {
       return 'https://www.' + this.getBaseDomain();
+    }
+  }
+
+  getDomainId() {
+    if (this.getCookie(this.domainIdName)) {
+      return this.getCookie(this.domainIdName);
+    } else {
+      return false;
     }
   }
 
