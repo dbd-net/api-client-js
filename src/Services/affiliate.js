@@ -13,20 +13,19 @@ export default class Affiliate {
     return token.getCookie('gamebetr_affiliate_id');
   }
 
-  listMedia() {
-    // do this with php instead of js?
+  listClicks(date_start, date_end) {
+    let client = new Client(this.config);
+    return client.request('GET', 'affiliate/clicks?filter[created_at]=bt|' + date_start + ';' + date_end + '&page[size]=9999');
   }
 
-  listReferredUsers() {
-    //
+  listSignups(date_start, date_end) {
+    let client = new Client(this.config);
+    return client.request('GET', 'affiliate/user/list?filter[created_at]=bt|' + date_start + ';' + date_end + '&page[size]=9999');
   }
 
-  listTiers() {
-    //
-  }
-
-  listRates() {
-    //
+  listEarnings(bank_uuid, bank_account_uuid, tags, date_start, date_end) {
+    let client = new Client(this.config);
+    return client.request('GET', 'bank/' + bank_uuid + '/reports/win-loss-by-tags?filter[bank-account-uuid]=' + bank_account_uuid + '&' + tags + ' &filter[date-start]=' + date_start + '&filter[date-end]=' + date_end);
   }
 
 }
