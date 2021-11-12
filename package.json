@@ -1,6 +1,6 @@
 {
   "name": "@gamebetr/api-client-js",
-  "version": "1.0.1019",
+  "version": "1.0.2",
   "description": "Gamebetr API client library",
   "main": "index.js",
   "dependencies": {

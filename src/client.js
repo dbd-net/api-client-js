@@ -3,7 +3,7 @@ import Token from './token';
 /**
  * Example usage:
  * let client = new Client({'baseUri': 'https://www.site.com'});
- * client.request('GET', '/api/v1/endpoint').then(data => console.log(data))
+ * client.request('GET', 'endpoint').then(data => console.log(data))
  */
 export default class Client {
 
