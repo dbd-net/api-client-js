@@ -23,9 +23,9 @@ export default class Affiliate {
     return client.request('GET', 'affiliate/user/list?filter[created_at]=bt|' + date_start + ';' + date_end + '&page[size]=9999');
   }
 
-  listEarnings(bank_uuid, bank_account_uuid, date_start, date_end) {
+  listEarnings(bank_uuid, bank_account_uuid, tags, date_start, date_end) {
     let client = new Client(this.config);
-    return client.request('GET', 'bank/' + bank_uuid + '/reports/win-loss-by-tags?filter[bank-account-uuid]=' + bank_account_uuid + '&filter[tags][0]=win&filter[date-start]=' + date_start + '&filter[date-end]=' + date_end);
+    return client.request('GET', 'bank/' + bank_uuid + '/reports/win-loss-by-tags?filter[bank-account-uuid]=' + bank_account_uuid + '&' + tags + ' &filter[date-start]=' + date_start + '&filter[date-end]=' + date_end);
   }
 
 }
