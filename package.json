@@ -1,6 +1,6 @@
 {
   "name": "@gamebetr/api-client-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Gamebetr API client library",
   "main": "index.js",
   "dependencies": {
@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gamebetr/api-client-js.git"
+    "url": "git+https://github.com/dbd-net/api-client-js.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gamebetr/api-client-js/issues"
+    "url": "https://github.com/dbd-net/api-client-js/issues"
   },
-  "homepage": "https://github.com/gamebetr/api-client-js#readme"
+  "homepage": "https://github.com/dbd-net/api-client-js#readme"
 }
