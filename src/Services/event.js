@@ -26,7 +26,7 @@ export default class Event {
     console.log('register start event complete');
   }
 
-  registerEnd(uuid) {
+  registerEnd(data) {
     if (!this.validDomain) {
       console.log('domain not valid');
       return;
@@ -35,7 +35,7 @@ export default class Event {
       fbq("track", "Lead", {
         currency: 'USD',
         value: 0,
-        external_id: uuid
+        external_id: data.data.id
       });
       console.log('fbq fired');
     }
@@ -44,7 +44,7 @@ export default class Event {
         event: "track.user.registration",
         payload: {
             action: "complete",
-            userId: uuid
+            userId: data.data.id
         }
       });
       console.log('srtmcommands fired');
@@ -52,13 +52,26 @@ export default class Event {
     console.log('register end event complete');
   }
 
-  login(uuid) {
+  login(data) {
+    // fire postmessage event for parents listening
+    let payload = {
+      'data': {
+        'id': Date.now().toString(),
+        'type': 'event',
+        'attributes': {
+          'event': 'login'
+        }
+      }
+    };
+    payload.data.relationships = {'authorizationToken': data};
+    window.parent.postMessage(payload, '*');
+
     if (!this.validDomain) {
       console.log('domain not valid');
       return;
     }
     if (typeof fbq === "function") {
-      fbq("trackCustom", "Login", { external_id: uuid });
+      fbq("trackCustom", "Login", { external_id: data.data.id });
       console.log('fbq fired');
     }
     if (typeof srtmCommands.push === "function") {
@@ -66,11 +79,12 @@ export default class Event {
         event: "track.user.login",
         payload: {
             action: "complete",
-            userId: uuid
+            userId: data.data.id
         }
       });
       console.log('srtmcommands fired');
     }
+
     console.log('login event complete');
   }
 
