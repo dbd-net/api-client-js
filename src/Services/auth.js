@@ -1,5 +1,4 @@
 import Client from '../client';
-import Token from '../token';
 
 export default class Auth {
 
@@ -32,6 +31,16 @@ export default class Auth {
       'password': password,
     };
     return client.request('POST', 'user/login', data);
+  }
+
+  login2fa(email, password, key) {
+    let client = new Client(this.config);
+    let data = {
+      'email': email,
+      'password': password,
+      'key': key,
+    };
+    return client.request('POST', 'user/login_2fa', data);
   }
 
   forgotPassword(email, new_password) {

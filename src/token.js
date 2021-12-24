@@ -2,11 +2,31 @@ export default class Token {
 
   constructor() {
     this.tokenName = 'gamebetr_token';
-    // set from external source
     this.baseDomainName = 'gamebetr_base_domain';
     this.apiUriName = 'gamebetr_api_uri';
     this.webUriName = 'gamebetr_web_uri';
     this.domainIdName = 'gamebetr_domain_id';
+  }
+
+  // this will inherit cookies from parent source if this page is embeded in iframe
+  inheritCookies() {
+    window.addEventListener('message', e => {
+      if (typeof e.data.data === 'undefined') {
+        return;
+      }
+      let data = e.data.data;
+      if (data.type != 'event') {
+        return;
+      }
+      if (data.attributes.event != 'auth_init') {
+        return;
+      }
+      // set cookies
+      this.setCookie(this.apiUriName, data.attributes.cookies[this.apiUriName]);
+      this.setCookie(this.webUriName, data.attributes.cookies[this.webUriName]);
+      this.setCookie(this.domainIdName, data.attributes.cookies[this.domainIdName]);
+      console.log('cookies inherited');
+    }, false);
   }
 
   // store the token as a cookie
@@ -15,12 +35,17 @@ export default class Token {
     let expires = new Date(expire).toUTCString();
 
     // use the current domain as wildcard domain for cookie
-    let domain = '.' + this.getBaseDomain();
+    // let domain = '.' + this.getBaseDomain();
     
-    document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain + ';path=/';
+    // document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain + ';path=/';
+    document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';path=/';
     // console.log('Cookie token set as: ' + token);
     // console.log(expires);
     // console.log(domain);
+  }
+
+  setCookie(name, value) {    
+    document.cookie = name + '=' + value + ';path=/';
   }
 
   getToken() {
@@ -75,6 +100,14 @@ export default class Token {
       }
     }
     return "";
+  }
+
+  getSafeCookies() {
+    let cookies = {};
+    cookies[this.apiUriName] = this.getCookie(this.apiUriName);
+    cookies[this.webUriName] = this.getCookie(this.webUriName);
+    cookies[this.domainIdName] = this.getCookie(this.domainIdName);
+    return cookies;
   }
 
   // logout
