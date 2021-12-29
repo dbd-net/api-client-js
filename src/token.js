@@ -110,6 +110,24 @@ export default class Token {
     return cookies;
   }
 
+  /**
+   * These are safe origins to use with window.postMessage()
+   */
+  getSafeOrigins() {
+    let origins = [];
+    origins.push('https://www.playbetr.com');
+    origins.push('https://www.betcoin.ag');
+    origins.push('https://playerapi.playbetr.com');
+    origins.push('https://playerapi.betcoin.ag');
+    origins.push('https://staging.playbetr.com');
+    origins.push('https://staging.betcoin.ag');
+    origins.push('https://staging-playerapi.playbetr.com');
+    origins.push('https://staging-playerapi.betcoin.ag');
+    origins.push('http://playbetr.lndo.site');
+    origins.push('http://betcoin.lndo.site');
+    return origins;
+  }
+
   // logout
   deleteToken() {
     //
