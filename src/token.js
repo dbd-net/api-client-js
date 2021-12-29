@@ -126,13 +126,13 @@ export default class Token {
     origins.push('https://staging.betcoin.ag');
     origins.push('https://staging-playerapi.playbetr.com');
     origins.push('https://staging-playerapi.betcoin.ag');
+    origins.push('http://staging.playbetr.com');
+    origins.push('http://staging.betcoin.ag');
+    origins.push('http://staging-playerapi.playbetr.com');
+    origins.push('http://staging-playerapi.betcoin.ag');
     origins.push('http://playbetr.lndo.site');
     origins.push('http://betcoin.lndo.site');
     return origins;
   }
 
-  // logout
-  deleteToken() {
-    //
-  }
 }
