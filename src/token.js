@@ -11,6 +11,9 @@ export default class Token {
   // this will inherit cookies from parent source if this page is embeded in iframe
   inheritCookies() {
     window.addEventListener('message', e => {
+      if (this.getSafeOrigins().indexOf(e.origin) == -1) {
+        return;
+      }
       if (typeof e.data.data === 'undefined') {
         return;
       }

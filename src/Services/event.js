@@ -64,7 +64,9 @@ export default class Event {
       }
     };
     payload.data.relationships = {'authorizationToken': data};
-    window.parent.postMessage(payload, '*');
+    token.getSafeOrigins().forEach(e => {
+      window.parent.postMessage(payload, e);
+    });
 
     if (!this.validDomain) {
       console.log('domain not valid');
