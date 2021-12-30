@@ -3,9 +3,9 @@ import Token from '../token';
 export default class Event {
 
   constructor() {
-    let token = new Token();
+    this.token = new Token();
     this.validDomain = false;
-    if (token.getDomainId() == 1000001)  {
+    if (this.token.getDomainId() == 1000001)  {
       this.validDomain = true;
     }
   }
@@ -64,8 +64,10 @@ export default class Event {
       }
     };
     payload.data.relationships = {'authorizationToken': data};
-    token.getSafeOrigins().forEach(e => {
-      window.parent.postMessage(payload, e);
+    this.token.getSafeOrigins().forEach(e => {
+      if (e == this.token.getWebUri()) {
+        window.parent.postMessage(payload, e);
+      }
     });
 
     if (!this.validDomain) {
