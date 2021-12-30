@@ -65,7 +65,10 @@ export default class Event {
     };
     payload.data.relationships = {'authorizationToken': data};
     token.getSafeOrigins().forEach(e => {
-      window.parent.postMessage(payload, e);
+      try {
+        window.parent.postMessage(payload, e);
+      }
+      catch(x) {}
     });
 
     if (!this.validDomain) {
