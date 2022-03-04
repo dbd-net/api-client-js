@@ -13,6 +13,19 @@ export default class Affiliate {
     return token.getCookie('gamebetr_affiliate_id');
   }
 
+  createConversion(domain_id, player_id, affiliate_id = 0, template_id = '', custom_id = '', promo_code = '') {
+    let client = new Client(this.config);
+    let data = {
+      'domain_id': domain_id,
+      'player_id': player_id,
+      'affiliate_id': affiliate_id,
+      'template_id': template_id,
+      'custom_id': custom_id,
+      'promo_code': promo_code
+    };
+    return client.request('POST', 'affiliate/conversions', data);
+  }
+
   listClicks(date_start, date_end) {
     let client = new Client(this.config);
     return client.request('GET', 'affiliate/clicks?filter[created_at]=bt|' + date_start + ';' + date_end + '&page[size]=9999');
