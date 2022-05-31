@@ -64,7 +64,7 @@ export default class Token {
       return this.getCookie(this.tokenName);
     } else {
     // else use auth cookie
-      const auth = JSON.parse(this.getCookie('auth'))
+      const auth = JSON.parse(this.getCookie('auth'));
       return auth.token.clearToken;
     }
   }
