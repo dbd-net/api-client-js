@@ -51,8 +51,22 @@ export default class Token {
     document.cookie = name + '=' + value + ';path=/';
   }
 
+  /**
+   * Old token has cookie name gamebetr_token and remains if needed to be set/get manually via BO
+   * 
+   * New token has cookie name auth and will be used if gamebetr_token does not exist
+   * 
+   * @returns token value
+   */
   getToken() {
-    return this.getCookie(this.tokenName);
+    // if gamebetr_token cookie exists use that
+    if (this.getCookie(this.tokenName)) {
+      return this.getCookie(this.tokenName);
+    } else {
+    // else use auth cookie
+      const auth = JSON.parse(this.getCookie('auth'))
+      return auth.token.clearToken;
+    }
   }
 
   getBaseDomain() {
