@@ -38,7 +38,6 @@ export default class Bank {
       'amount': amount,
       'notes': notes,
       'type': type
-
     };
     return client.request('POST', 'p2p/transfer', data);
   }
