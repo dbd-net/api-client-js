@@ -39,7 +39,7 @@ export default class Token {
 
     // use the current domain as wildcard domain for cookie
     // let domain = '.' + this.getBaseDomain();
-    
+
     // document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';domain=' + domain + ';path=/';
     document.cookie = this.tokenName + '=' + token + ';expires=' + expires + ';path=/';
     // console.log('Cookie token set as: ' + token);
@@ -47,15 +47,15 @@ export default class Token {
     // console.log(domain);
   }
 
-  setCookie(name, value) {    
+  setCookie(name, value) {
     document.cookie = name + '=' + value + ';path=/';
   }
 
   /**
    * Old token has cookie name gamebetr_token and remains if needed to be set/get manually via BO
-   * 
+   *
    * New token has cookie name auth and will be used if gamebetr_token does not exist
-   * 
+   *
    * @returns token value
    */
   getToken() {
@@ -64,8 +64,12 @@ export default class Token {
       return this.getCookie(this.tokenName);
     } else {
     // else use auth cookie
-      const auth = JSON.parse(this.getCookie('auth'));
-      return auth.token.clearToken;
+      try {
+        const auth = JSON.parse(this.getCookie('auth'));
+        return auth.token.clearToken;
+      } catch (e) {
+        return '';
+      }
     }
   }
 
@@ -78,7 +82,7 @@ export default class Token {
       return host.split('.')[host.split('.').length-2]+'.'+host.split('.')[host.split('.').length-1];
     }
   }
-  
+
   getApiUri() {
     if (this.getCookie(this.apiUriName)) {
       return this.getCookie(this.apiUriName);
