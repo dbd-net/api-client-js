@@ -62,10 +62,13 @@ export default class Token {
     // if gamebetr_token cookie exists use that
     if (this.getCookie(this.tokenName)) {
       return this.getCookie(this.tokenName);
-    } else {
+    } else if (this.getCookie('auth')) {
     // else use auth cookie
       const auth = JSON.parse(this.getCookie('auth'));
       return auth.token.clearToken;
+    } else {
+    // else return
+      return;
     }
   }
 
