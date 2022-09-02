@@ -18,7 +18,6 @@ export default class Client {
     if (typeof config.token !== 'undefined') {
       this.setToken(config.token);
     } else {
-      // console.log('client instantiated with token: ' + token.getToken());
       this.setToken(token.getToken());
     }
   }
@@ -36,9 +35,12 @@ export default class Client {
   }
 
   request(method, uri, bodyData = null) {
-    var myHeaders = {
-      'Authorization': 'Bearer ' + this.token
-    };
+    var myHeaders = {};
+    if (typeof this.token !== 'undefined') {
+      var myHeaders = {
+        'Authorization': 'Bearer ' + this.token
+      };
+    }
 
     var requestOptions = {
       method: method,
