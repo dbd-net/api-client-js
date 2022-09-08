@@ -5,15 +5,22 @@ export default class Leaderboard {
   constructor(config = {}) {
     this.config = config;
   }
+
+  list() {
+    // also make sure enabled=1
+    let endpoint = 'leaderboard/app/leaders?sort=weight';
+    let client = new Client(this.config);
+    return client.request('GET', endpoint);
+  }
   
-  results(uuid) {
-    let endpoint = 'leaderboard/' + uuid + '/intervals/current';
+  results(uuid, limit = 20) {
+    let endpoint = 'leaderboard/' + uuid + '/intervals/current?limit=' + limit;
     let client = new Client(this.config);
     return client.request('GET', endpoint);
   }
 
-  hof(uuid) {
-    let endpoint = 'leaderboard/' + uuid + '/reports/hof';
+  hof(uuid, limit = 20) {
+    let endpoint = 'leaderboard/' + uuid + '/reports/hof?limit=' + limit;
     let client = new Client(this.config);
     return client.request('GET', endpoint);
   }
