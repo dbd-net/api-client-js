@@ -62,14 +62,20 @@ export default class Token {
     // if gamebetr_token cookie exists use that
     if (this.getCookie(this.tokenName)) {
       return this.getCookie(this.tokenName);
-    } else if (this.getCookie('auth')) {
-    // else use auth cookie
-      const auth = JSON.parse(this.getCookie('auth'));
-      return auth.token.clearToken;
-    } else {
-    // else return
-      return;
     }
+
+    // Next check auth cookie.
+    let authCookie = this.getCookie('auth')
+    if (authCookie) {
+      try {
+        return JSON.parse(authCookie).token.clearToken;
+      } catch (e) {
+        // Some auth cookies may not be valid JSON
+        console.error('Invalid auth token ' + e.message);
+      }
+    }
+
+    // All others fall through to null
   }
 
   getBaseDomain() {
