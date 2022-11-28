@@ -21,7 +21,7 @@ export default class Bank {
     return client.request('GET', 'bank/account/' + display_unit + '/primary');
   }
 
-  createTransfer(from, to, amount) {
+  createAccountTransfer(from, to, amount) {
     let client = new Client(this.config);
     let data = {
       'from': from,
@@ -29,6 +29,17 @@ export default class Bank {
       'amount': amount
     };
     return client.request('POST', 'bank/transfer', data);
+  }
+
+  createP2pTransfer(to_player_id, currency, amount, note = '') {
+    let client = new Client(this.config);
+    let data = {
+      'to_player_id': to_player_id,
+      'currency': currency,
+      'amount': amount,
+      'note': note
+    };
+    return client.request('POST', 'p2p/transfer', data);
   }
 
 }
