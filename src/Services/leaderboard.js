@@ -13,14 +13,14 @@ export default class Leaderboard {
     return client.request('GET', endpoint);
   }
   
-  results(uuid, limit = 20) {
-    let endpoint = 'leaderboard/' + uuid + '/intervals/current?limit=' + limit;
+  results(uuid, playerId = '', limit = 20) {
+    let endpoint = 'leaderboard/' + uuid + '/intervals/current?limit=' + limit + '&filter[player_id]=' + playerId;
     let client = new Client(this.config);
     return client.request('GET', endpoint);
   }
 
-  hof(uuid, limit = 20) {
-    let endpoint = 'leaderboard/' + uuid + '/reports/hof?limit=' + limit;
+  hof(uuid, playerId = '', limit = 20) {
+    let endpoint = 'leaderboard/' + uuid + '/reports/hof?limit=' + limit + '&filter[player_id]=' + playerId;
     let client = new Client(this.config);
     return client.request('GET', endpoint);
   }
