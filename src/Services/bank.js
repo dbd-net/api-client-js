@@ -11,6 +11,11 @@ export default class Bank {
     return client.request('GET', 'bank/account?sort=-primary,bank.weight');
   }
 
+  getBankAccount(type) {
+    let client = new Client(this.config);
+    return client.request('GET', 'bank/account/' + type);
+  }
+
   getPrimaryBankAccount() {
     let client = new Client(this.config);
     return client.request('GET', 'bank/account?sort=-primary&page[size]=1');
@@ -40,6 +45,10 @@ export default class Bank {
       'note': note
     };
     return client.request('POST', 'p2p/transfer', data);
+  }
+
+  buyCurrency() {
+    //
   }
 
 }
