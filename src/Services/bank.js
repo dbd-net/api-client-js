@@ -47,8 +47,14 @@ export default class Bank {
     return client.request('POST', 'p2p/transfer', data);
   }
 
-  buyCurrency() {
-    //
+  buyCurrency(toPay, toBuy, amount) {
+    let client = new Client(this.config);
+    let data = {
+      'toPay': toPay,
+      'toBuy': toBuy,
+      'payAmount': amount
+    };
+    return client.request('POST', 'bank/currency/buy', data);
   }
 
 }
