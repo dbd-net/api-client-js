@@ -36,10 +36,10 @@ export default class Bank {
     return client.request('POST', 'bank/transfer', data);
   }
 
-  createP2pTransfer(to_player_id, currency, amount, note = '') {
+  createP2pTransfer(to_username, currency, amount, note = '') {
     let client = new Client(this.config);
     let data = {
-      'to_player_id': to_player_id,
+      'to_username': to_username,
       'currency': currency,
       'amount': amount,
       'note': note
