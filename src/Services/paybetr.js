@@ -28,6 +28,23 @@ export default class Paybetr {
     return client.request('POST', 'paybetr/address', data);
   }
 
+  getMultiAddress(symbol) {
+    let client = new Client(this.config);
+    let data = {
+      'symbol': symbol
+    };
+    return client.request('POST', 'paybetr/multiaddress', data);
+  }
+
+  createMultiAddress(symbol) {
+    let client = new Client(this.config);
+    let data = {
+      'symbol': symbol,
+      'refresh': 1
+    };
+    return client.request('POST', 'paybetr/multiaddress', data);
+  }
+
   createWithdrawal(symbol, address, amount) {
     let client = new Client(this.config);
     let data = {
